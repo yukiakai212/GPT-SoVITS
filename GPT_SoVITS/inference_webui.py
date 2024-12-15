@@ -768,5 +768,5 @@ if __name__ == '__main__':
         inbrowser=True,
         share=is_share,
         server_port=infer_ttswebui,
-        quiet=True,
+        quiet=False,
     )
