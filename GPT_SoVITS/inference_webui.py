@@ -542,7 +542,9 @@ def get_tts_miyuki(text, top_k=15, top_p=1, temperature=1, speed=1, if_freeze=Fa
     how_to_cut = "Slice once every 4 sentences"
     ref_free = False
     inp_refs = None
-    return get_tts_wav(ref_wav_path, prompt_text, prompt_language, text, text_language, how_to_cut, top_k, top_p, temperature, ref_free, speed, if_freeze, inp_refs)
+    wav = get_tts_wav(ref_wav_path, prompt_text, prompt_language, text, text_language, how_to_cut, top_k, top_p, temperature, ref_free, speed, if_freeze, inp_refs)
+    for data in wav:
+        yield data
 
 def split(todo_text):
     todo_text = todo_text.replace("……", "。").replace("——", "，")
@@ -745,7 +747,7 @@ with gr.Blocks(title="GPT-SoVITS WebUI") as app:
             #     phoneme=gr.Textbox(label=i18n("音素框"), value="")
             #     get_phoneme_button = gr.Button(i18n("目标文本转音素"), variant="primary")
         with gr.Row():
-            with gr.Column(scale=25):
+            with gr.Column(scale=26):
                 inference_button = gr.Button(i18n("合成语音"), variant="primary", size='lg')
                 inference_miyuki_button = gr.Button(i18n("合成语音") + ": Miyuki", variant="primary", size='lg')
             output = gr.Audio(label=i18n("输出的语音"), scale=14)
