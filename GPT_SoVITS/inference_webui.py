@@ -745,9 +745,9 @@ with gr.Blocks(title="GPT-SoVITS WebUI") as app:
             #     phoneme=gr.Textbox(label=i18n("音素框"), value="")
             #     get_phoneme_button = gr.Button(i18n("目标文本转音素"), variant="primary")
         with gr.Row():
-            with gr.Column():
-                inference_button = gr.Button(i18n("合成语音"), variant="primary", size='lg', scale=25)
-                inference_miyuki_button = gr.Button(i18n("合成语音") + ": Miyuki", variant="primary", size='lg', scale=25)
+            with gr.Column(scale=25):
+                inference_button = gr.Button(i18n("合成语音"), variant="primary", size='lg')
+                inference_miyuki_button = gr.Button(i18n("合成语音") + ": Miyuki", variant="primary", size='lg')
             output = gr.Audio(label=i18n("输出的语音"), scale=14)
 
         inference_button.click(
