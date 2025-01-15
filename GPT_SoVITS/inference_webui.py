@@ -534,7 +534,8 @@ def get_tts_wav(ref_wav_path, prompt_text, prompt_language, text, text_language,
     )
 
 def get_tts_miyuki(text, top_k=15, top_p=1, temperature=1, speed=1, if_freeze=False):
-    ref_wav_path = "voice_ref/miyuki.wav"
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    ref_wav_path = os.path.join(current_dir, "voice_ref", "miyuki.wav")
     prompt_text = "最高のゲームを作るためにはやっぱり色んな経験が必要なの。恋愛経験も……ね？"
     prompt_language = "Japanese"
     text_language = "Japanese-English Mixed"
@@ -744,8 +745,9 @@ with gr.Blocks(title="GPT-SoVITS WebUI") as app:
             #     phoneme=gr.Textbox(label=i18n("音素框"), value="")
             #     get_phoneme_button = gr.Button(i18n("目标文本转音素"), variant="primary")
         with gr.Row():
-            inference_button = gr.Button(i18n("合成语音"), variant="primary", size='lg', scale=25)
-            inference_miyuki_button = gr.Button(i18n("合成语音") + ": Miyuki", variant="primary", size='lg', scale=25)
+            with gr.Column():
+                inference_button = gr.Button(i18n("合成语音"), variant="primary", size='lg', scale=25)
+                inference_miyuki_button = gr.Button(i18n("合成语音") + ": Miyuki", variant="primary", size='lg', scale=25)
             output = gr.Audio(label=i18n("输出的语音"), scale=14)
 
         inference_button.click(
